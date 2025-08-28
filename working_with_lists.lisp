@@ -30,7 +30,7 @@
 
 (defun compress (ls)
   (do ((l ls (cdr l))
-       (out '() (cond ((or (not out)
+       (out '() (cond ((or (null out)
 			   (not (equal (car out) (car l))))
 		       (cons (car l) out))
 		      (t out))))
@@ -38,7 +38,7 @@
 
 (defun pack (ls)
   (do ((ls1 ls (cdr ls1))
-       (out '() (cond ((or (not out)
+       (out '() (cond ((or (null out)
 			   (not (equal (caar out) (car ls1))))
 		       (cons (list (car ls1)) out))
 		      (t (cons (cons (car ls1) (car out)) (cdr out))))))
