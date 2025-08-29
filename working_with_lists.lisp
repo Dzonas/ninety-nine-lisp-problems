@@ -46,3 +46,10 @@
 
 (defun encode (ls)
   (mapcar (lambda (group) (list (length group) (car group))) (pack ls)))
+
+(defun encode-modified (ls)
+  (mapcar (lambda (group)
+	    (if (= 1 (car group))
+		(second group)
+		group))
+	  (encode ls)))
