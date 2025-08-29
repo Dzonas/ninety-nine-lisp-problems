@@ -43,3 +43,6 @@
 	  (push elem (car result))
 	  (push (list elem) result)))
     (reverse result)))
+
+(defun encode (ls)
+  (mapcar (lambda (group) (list (length group) (car group))) (pack ls)))
