@@ -180,3 +180,41 @@
 	     (m (mod n len)))
 	(destructuring-bind (left right) (split ls m)
 	  (append right left)))))
+
+;;; P20
+
+(defun remove-at (ls n)
+  (loop for elem in ls
+	for i from 1
+	if (/= i n)
+	  collect elem))
+
+;;; P21
+
+(defun insert-at (obj ls n)
+  (if (= (length ls) (1- n))
+      (append ls (list obj))
+      (loop for elem in ls
+	    for i from 1
+	    if (= i n)
+	      collect obj
+	    collect elem)))
+
+;;; P22
+
+(defun range (left right)
+  (loop for i from left to right collect i))
+
+;;; P23
+
+(defun rnd-select (ls n)
+  (let ((out ls)
+	(rs (make-random-state t)))
+    (dotimes (i (- (length ls) n))
+      (setf out (remove-at out (1+ (random (length out) rs)))))
+    out))
+
+;;; P24
+
+(defun lotto-select (n m)
+  (rnd-select (range 1 m) n))
