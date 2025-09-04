@@ -80,14 +80,6 @@
 
 ;;; P12
 
-(defun decode (ls)
-  (let ((out '()))
-    (dolist (group ls)
-      (let ((count (decode-extract-count group))
-	    (elem (decode-extract-elem group)))
-	(dotimes (i count) (push elem out))))
-    (reverse out)))
-
 (defun decode-extract-count (ls)
   (if (listp ls)
       (first ls)
@@ -98,15 +90,15 @@
       (second ls)
       ls))
 
-;;; P13
-
-(defun encode-direct (ls)
+(defun decode (ls)
   (let ((out '()))
-    (dolist (elem ls)
-      (if (and out (equal elem (encode-direct-get-elem out)))
-	  (encode-direct-inc-count out)
-	  (setf out (cons elem out))))
-  (reverse out)))
+    (dolist (group ls)
+      (let ((count (decode-extract-count group))
+	    (elem (decode-extract-elem group)))
+	(dotimes (i count) (push elem out))))
+    (reverse out)))
+
+;;; P13
 
 (defun encode-direct-get-elem (ls)
   (let ((fst (first ls)))
@@ -118,6 +110,14 @@
   (if (and (first ls) (listp (first ls)))
       (incf (first (first ls)))
       (setf (first ls) (list 2 (first ls)))))
+
+(defun encode-direct (ls)
+  (let ((out '()))
+    (dolist (elem ls)
+      (if (and out (equal elem (encode-direct-get-elem out)))
+	  (encode-direct-inc-count out)
+	  (setf out (cons elem out))))
+  (reverse out)))
 
 ;;; P14
 
@@ -218,3 +218,5 @@
 
 (defun lotto-select (n m)
   (rnd-select (range 1 m) n))
+
+;;; P25
