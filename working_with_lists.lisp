@@ -223,3 +223,8 @@
 
 (defun lotto-select (n m)
   (rnd-select (range 1 m) n))
+
+;;; P25
+
+(defun rnd-permu (ls)
+  (rnd-select ls (length ls)))
