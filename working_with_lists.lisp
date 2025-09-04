@@ -41,8 +41,8 @@
 
 (defun my-flatten (ls)
   (cond ((not ls) '())
-	((listp (car ls)) (append (flatten (car ls)) (flatten (cdr ls))))
-	(t (cons (car ls) (flatten (cdr ls))))))
+	((listp (car ls)) (append (my-flatten (car ls)) (my-flatten (cdr ls))))
+	(t (cons (car ls) (my-flatten (cdr ls))))))
 
 ;;; P08
 
