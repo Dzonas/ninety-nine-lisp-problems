@@ -208,15 +208,18 @@
 ;;; P23
 
 (defun rnd-select (ls n)
-  (let ((out ls)
-	(rs (make-random-state t)))
-    (dotimes (i (- (length ls) n))
-      (setf out (remove-at out (1+ (random (length out) rs)))))
+  (let ((ls1 ls)
+	(len (length ls))
+	(out '()))
+    (dotimes (i n)
+      (let* ((j (random len))
+	     (elem (elt ls1 j)))
+	(setf ls1 (remove-at ls1 (1+ j)))
+	(push elem out)
+	(decf len)))
     out))
 
 ;;; P24
 
 (defun lotto-select (n m)
   (rnd-select (range 1 m) n))
-
-;;; P25
